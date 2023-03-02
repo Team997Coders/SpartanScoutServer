@@ -19,6 +19,10 @@ dependencies {
     implementation("org.slf4j:slf4j-api:2.0.6")
     implementation("org.slf4j:slf4j-simple:2.0.6")
     implementation("io.github.xn32:json5k:0.2.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
+    implementation("org.dizitart:potassium-nitrite:3.4.4")
+
 }
 
 tasks.test {
