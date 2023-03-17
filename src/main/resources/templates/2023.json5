@@ -12,264 +12,285 @@
     // This should be incremented each time the template is updated.
     version: 1,
     // Pit scouting
-    pit: [
-        {
-            name: "team_info",
-            type: "section",
-            prompt: "Team Info"
-        },
-        {
-            name: "team_number",
-            type: "text",
-            prompt: "Team Number",
-            numeric: true,
-            length: 4,
-        },
-        {
-            name: "comments",
-            type: "text",
-            prompt: "Additional Comments."
-        }
-    ],
+    pit: {
+        title: "%team_number%",
+        entries: [
+            {
+                name: "team_info",
+                type: "section",
+                prompt: "Team Info"
+            },
+            {
+                name: "scouter_name",
+                type: "text",
+                prompt: "Scouter Name"
+            },
+            {
+                name: "team_number",
+                type: "text",
+                prompt: "Team Number",
+                numeric: true,
+                length: 4,
+            },
+            {
+                name: "comments",
+                type: "text",
+                prompt: "Additional Comments."
+            }
+        ]
+    },
     // Match scouting
-    match: [
-        {
-            name: "match_info",
-            type: "section",
-            prompt: "Match Info"
-        },
-        {
-            name: "team_number",
-            type: "text",
-            prompt: "Team Number",
-            numeric: true,
-            length: 4,
-        },
-        {
-            name: "match_number",
-            type: "text",
-            prompt: "Match Number",
-            numeric: true,
-        },
-        {
-            name: "alliance_color",
-            type: "text",
-            prompt: "Alliance Color",
-        },
-        {
-            name: "autonomous_section",
-            type: "section",
-            prompt: "Autonomous"
-        },
-        {
-            name: "cone_high_auto",
-            type: "counter",
-            prompt: "Cone High"
-        },
-        {
-            name: "cone_mid_auto",
-            type: "counter",
-            prompt: "Cone Mid"
-        },
-        {
-            name: "cone_low_auto",
-            type: "counter",
-            prompt: "Cone Low"
-        },
-        {
-            type: "spacer",
-        },
-        {
-            name: "cube_high_auto",
-            type: "counter",
-            prompt: "Cube High"
-        },
-        {
-            name: "cube_mid_auto",
-            type: "counter",
-            prompt: "Cube Mid"
-        },
-        {
-            name: "cube_low_auto",
-            type: "counter",
-            prompt: "Cube Low"
-        },
-        {
-            type: "spacer",
-        },
-        {
-            name: "engaged_auto",
-            type: "checkbox",
-            prompt: "Level on Charge Station (ENGAGED)",
-            excludes: [
-                "docked_auto"
-            ]
-        },
-        {
-            name: "docked_auto",
-            type: "checkbox",
-            prompt: "Touching Charge Station (DOCKED)",
-            excludes: [
-                "engaged_auto"
-            ]
-        },
-        {
-            type: "spacer",
-        },
-        {
-            name: "mobility",
-            type: "checkbox",
-            prompt: "Left Community (MOBILITY)"
-        },
-        {
-            name: "teleop_section",
-            type: "section",
-            prompt: "Teleop"
-        },
-        {
-            name: "cone_high_teleop",
-            type: "counter",
-            prompt: "Cone High"
-        },
-        {
-            name: "cone_mid_teleop",
-            type: "counter",
-            prompt: "Cone Mid"
-        },
-        {
-            name: "cone_low_teleop",
-            type: "counter",
-            prompt: "Cone Low"
-        },
-        {
-            type: "spacer",
-        },
-        {
-            name: "cube_high_teleop",
-            type: "counter",
-            prompt: "Cube High"
-        },
-        {
-            name: "cube_mid_teleop",
-            type: "counter",
-            prompt: "Cube Mid"
-        },
-        {
-            name: "cube_low_teleop",
-            type: "counter",
-            prompt: "Cube Low"
-        },
-        {
-            type: "spacer",
-        },
-        {
-            name: "engaged_teleop",
-            type: "checkbox",
-            prompt: "Level on Charge Station (ENGAGED)",
-            excludes: [
-                "docked_teleop",
-                "parked_teleop",
-            ]
-        },
-        {
-            name: "docked_teleop",
-            type: "checkbox",
-            prompt: "Touching Charge Station (DOCKED)",
-            excludes: [
-                "engaged_teleop",
-                "parked_teleop",
-            ]
-        },
-        {
-            name: "parked_teleop",
-            type: "checkbox",
-            prompt: "Within community but not docked (PARKED)",
-            excludes: [
-                "docked_teleop",
-                "engaged_teleop",
-            ]
-        },
-        {
-            name: "robot_abilities",
-            type: "section",
-            prompt: "Robot Abilities"
-        },
-        {
-            name: "ground_cube",
-            type: "checkbox",
-            prompt: "Cubes from ground",
-        },
-        {
-            name: "ground_cone",
-            type: "checkbox",
-            prompt: "Cones from ground",
-        },
-        {
-            name: "play_cube",
-            type: "checkbox",
-            prompt: "Cubes from player stations",
-        },
-        {
-            name: "player_cone",
-            type: "checkbox",
-            prompt: "Cones from player stations",
-        },
-        {
-            type: "spacer",
-        },
-        {
-            name: "foul_number",
-            type: "counter",
-            prompt: "Number of Fouls"
-        },
-        {
-            name: "defense_grade",
-            type: "counter",
-            prompt: "Grade of Defense"
-        },
-        {
-            name: "fast",
-            type: "checkbox",
-            prompt: "Fast",
-        },
-        {
-            name: "alliance_performance",
-            type: "section",
-            prompt: "Alliance Performance"
-        },
-        {
-            name: "alliance_win",
-            type: "checkbox",
-            prompt: "Win",
-        },
-        {
-            name: "alliance_coopertition",
-            type: "checkbox",
-            prompt: "Coopertition",
-        },
-        {
-            name: "alliance_sustainability",
-            type: "checkbox",
-            prompt: "Sustainability",
-        },
-        {
-            name: "alliance_cs_bonus",
-            type: "checkbox",
-            prompt: "Charge Station Bonus",
-        },
-        {
-            name: "rp_number",
-            type: "counter",
-            prompt: "Number of Ranking Points"
-        },
-        {
-            type: "spacer",
-        },
-        {
-            name: "comments",
-            type: "text",
-            prompt: "Additional Comments.",
-            multiline: true,
-        }
-    ]
+    match: {
+        title: "%team_number% - %match_number%",
+        entries: [
+            {
+                name: "match_info",
+                type: "section",
+                prompt: "Match Info"
+            },
+            {
+                name: "scouter_name",
+                type: "text",
+                prompt: "Scouter Name"
+            },
+            {
+                name: "match_number",
+                type: "text",
+                prompt: "Match Number",
+            },
+            {
+                name: "team_number",
+                type: "text",
+                prompt: "Team Number",
+                numeric: true,
+                length: 4,
+            },
+            {
+                name: "match_number",
+                type: "text",
+                prompt: "Match Number",
+            },
+            {
+                name: "alliance_color",
+                type: "text",
+                prompt: "Alliance Color",
+            },
+            {
+                name: "autonomous_section",
+                type: "section",
+                prompt: "Autonomous"
+            },
+            {
+                name: "cone_high_auto",
+                type: "counter",
+                prompt: "Cone High"
+            },
+            {
+                name: "cone_mid_auto",
+                type: "counter",
+                prompt: "Cone Mid"
+            },
+            {
+                name: "cone_low_auto",
+                type: "counter",
+                prompt: "Cone Low"
+            },
+            {
+                type: "spacer",
+            },
+            {
+                name: "cube_high_auto",
+                type: "counter",
+                prompt: "Cube High"
+            },
+            {
+                name: "cube_mid_auto",
+                type: "counter",
+                prompt: "Cube Mid"
+            },
+            {
+                name: "cube_low_auto",
+                type: "counter",
+                prompt: "Cube Low"
+            },
+            {
+                type: "spacer",
+            },
+            {
+                name: "engaged_auto",
+                type: "checkbox",
+                prompt: "Level on Charge Station (ENGAGED)",
+                excludes: [
+                    "docked_auto"
+                ]
+            },
+            {
+                name: "docked_auto",
+                type: "checkbox",
+                prompt: "Touching Charge Station (DOCKED)",
+                excludes: [
+                    "engaged_auto"
+                ]
+            },
+            {
+                type: "spacer",
+            },
+            {
+                name: "mobility",
+                type: "checkbox",
+                prompt: "Left Community (MOBILITY)"
+            },
+            {
+                name: "teleop_section",
+                type: "section",
+                prompt: "Teleop"
+            },
+            {
+                name: "cone_high_teleop",
+                type: "counter",
+                prompt: "Cone High"
+            },
+            {
+                name: "cone_mid_teleop",
+                type: "counter",
+                prompt: "Cone Mid"
+            },
+            {
+                name: "cone_low_teleop",
+                type: "counter",
+                prompt: "Cone Low"
+            },
+            {
+                type: "spacer",
+            },
+            {
+                name: "cube_high_teleop",
+                type: "counter",
+                prompt: "Cube High"
+            },
+            {
+                name: "cube_mid_teleop",
+                type: "counter",
+                prompt: "Cube Mid"
+            },
+            {
+                name: "cube_low_teleop",
+                type: "counter",
+                prompt: "Cube Low"
+            },
+            {
+                type: "spacer",
+            },
+            {
+                name: "engaged_teleop",
+                type: "checkbox",
+                prompt: "Level on Charge Station (ENGAGED)",
+                excludes: [
+                    "docked_teleop",
+                    "parked_teleop",
+                ]
+            },
+            {
+                name: "docked_teleop",
+                type: "checkbox",
+                prompt: "Touching Charge Station (DOCKED)",
+                excludes: [
+                    "engaged_teleop",
+                    "parked_teleop",
+                ]
+            },
+            {
+                name: "parked_teleop",
+                type: "checkbox",
+                prompt: "Within community but not docked (PARKED)",
+                excludes: [
+                    "docked_teleop",
+                    "engaged_teleop",
+                ]
+            },
+            {
+                name: "robot_abilities",
+                type: "section",
+                prompt: "Robot Abilities"
+            },
+            {
+                name: "ground_cube",
+                type: "checkbox",
+                prompt: "Cubes from ground",
+            },
+            {
+                name: "ground_cone",
+                type: "checkbox",
+                prompt: "Cones from ground",
+            },
+            {
+                name: "play_cube",
+                type: "checkbox",
+                prompt: "Cubes from player stations",
+            },
+            {
+                name: "player_cone",
+                type: "checkbox",
+                prompt: "Cones from player stations",
+            },
+            {
+                type: "spacer",
+            },
+            {
+                name: "foul_number",
+                type: "counter",
+                prompt: "Number of Fouls"
+            },
+            {
+                name: "defense_grade",
+                type: "counter",
+                prompt: "Grade of Defense",
+                maxValue: 5
+            },
+            {
+                name: "fast",
+                type: "checkbox",
+                prompt: "Fast",
+            },
+            {
+                name: "alliance_performance",
+                type: "section",
+                prompt: "Alliance Performance"
+            },
+            {
+                name: "alliance_win",
+                type: "checkbox",
+                prompt: "Win",
+            },
+            {
+                name: "alliance_coopertition",
+                type: "checkbox",
+                prompt: "Coopertition",
+            },
+            {
+                name: "alliance_sustainability",
+                type: "checkbox",
+                prompt: "Sustainability",
+            },
+            {
+                name: "alliance_cs_bonus",
+                type: "checkbox",
+                prompt: "Charge Station Bonus",
+            },
+            {
+                name: "rp_number",
+                type: "counter",
+                prompt: "Number of Ranking Points"
+            },
+            {
+                type: "spacer",
+            },
+            {
+                name: "comments",
+                type: "text",
+                prompt: "Additional Comments.",
+                multiline: true,
+            }
+        ]
+    }
 }

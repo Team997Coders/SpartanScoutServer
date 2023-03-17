@@ -14,6 +14,8 @@ import io.ktor.server.netty.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -72,28 +74,30 @@ fun main() {
     embeddedServer(Netty, port = 8080, module = {
         routing {
             get("/template") {
-                val uuid = call.request.queryParameters["uuid"]
-                val version = call.request.queryParameters["version"]
-                if (uuid == null) {
-                    if (defaultTemplate != null) {
-                        call.respond(json.encodeToString(defaultTemplate))
-                    } else {
-                        call.respond(json.encodeError("Default template not set!"))
-                    }
-                } else {
-                    if (version == null) {
-                        val template = templates.filter { it.uuid == uuid }.maxByOrNull { it.version }
-                        if (template == null) {
-                            call.respond(json.encodeError("No matching template found!"))
+                withContext(Dispatchers.IO) {
+                    val uuid = call.request.queryParameters["uuid"]
+                    val version = call.request.queryParameters["version"]
+                    if (uuid == null) {
+                        if (defaultTemplate != null) {
+                            call.respond(json.encodeToString(defaultTemplate))
                         } else {
-                            call.respond(json.encodeToString(template))
+                            call.respond(json.encodeError("Default template not set!"))
                         }
                     } else {
-                        val template = templates.filter { it.uuid == uuid && it.version.toString() == version }
-                        if (template.isEmpty()) {
-                            call.respond(json.encodeError("No matching template found!"))
+                        if (version == null) {
+                            val template = templates.filter { it.uuid == uuid }.maxByOrNull { it.version }
+                            if (template == null) {
+                                call.respond(json.encodeError("No matching template found!"))
+                            } else {
+                                call.respond(json.encodeToString(template))
+                            }
                         } else {
-                            call.respond(json.encodeToString(template.first()))
+                            val template = templates.filter { it.uuid == uuid && it.version.toString() == version }
+                            if (template.isEmpty()) {
+                                call.respond(json.encodeError("No matching template found!"))
+                            } else {
+                                call.respond(json.encodeToString(template.first()))
+                            }
                         }
                     }
                 }
@@ -108,16 +112,18 @@ fun main() {
                             HttpHeaders.ContentType,
                             "application/json"
                         )
-                        try {
-                            val data = call.request.queryParameters["since"]?.let {
-                                println("GOT THE SINCE")
-                                println(Instant.parse(it))
-                                repo.find(DbScoutingData::updated gt Instant.parse(it))
-                            } ?: repo.find()
-                            call.respond(json.encodeToString(data.map { it.toSimpleScoutingData() }.toList()))
-                        } catch (e: Exception) {
-                            e.printStackTrace()
-                            call.respond(json.encodeError(e.toString()))
+                        withContext(Dispatchers.IO) {
+                            try {
+                                val data = call.request.queryParameters["since"]?.let {
+                                    println("GOT THE SINCE")
+                                    println(Instant.parse(it))
+                                    repo.find(DbScoutingData::updated gt Instant.parse(it))
+                                } ?: repo.find()
+                                call.respond(json.encodeToString(data.map { it.toSimpleScoutingData() }.toList()))
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                                call.respond(json.encodeError(e.toString()))
+                            }
                         }
                     }
                     post {
@@ -125,68 +131,89 @@ fun main() {
                             HttpHeaders.ContentType,
                             "application/json"
                         )
-                        try {
-                            val data: SimpleScoutingData = json.decodeFromStream(call.receiveStream())
-                            data.storedAt = Clock.System.now()
-                            val cursor = repo.find(SimpleScoutingData::uuid eq data.uuid)
-                            if (cursor.size() > 0) {
-                                if (data.updated >= cursor.first().updated) {
-                                    repo.update(data.toDbScoutingData())
+                        withContext(Dispatchers.IO) {
+                            try {
+                                val data: SimpleScoutingData = json.decodeFromStream(call.receiveStream())
+                                data.storedAt = Clock.System.now()
+                                val cursor = repo.find(SimpleScoutingData::uuid eq data.uuid)
+                                if (cursor.size() > 0) {
+                                    if (data.updated >= cursor.first().updated) {
+                                        repo.update(data.toDbScoutingData())
+                                    }
+                                } else {
+                                    repo.insert(data.toDbScoutingData())
                                 }
-                            } else {
-                                repo.insert(data.toDbScoutingData())
+                                val result =
+                                    repo.find(SimpleScoutingData::uuid eq data.uuid).first().toSimpleScoutingData()
+                                println(ObjectMapper().writer().writeValueAsString(data))
+                                call.respond(json.encodeToString(result))
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                                call.respond(json.encodeError(e.toString()))
                             }
-                            val result = repo.find(SimpleScoutingData::uuid eq data.uuid).first().toSimpleScoutingData()
-                            println(ObjectMapper().writer().writeValueAsString(data))
-                            call.respond(json.encodeToString(result))
-                        } catch (e: Exception) {
-                            e.printStackTrace()
-                            call.respond(json.encodeError(e.toString()))
+                        }
+                    }
+                    delete {
+                        call.response.header(
+                            HttpHeaders.ContentType,
+                            "application/json"
+                        )
+                        withContext(Dispatchers.IO) {
+                            try {
+                                val data: Map<String, String> = json.decodeFromStream(call.receiveStream())
+                                val res = repo.remove(SimpleScoutingData::uuid eq data.get("uuid"))
+                                call.respond(json.encodeToString(mapOf("success" to (res.affectedCount != 0))))
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                                call.respond(json.encodeError(e.toString()))
+                            }
                         }
                     }
                     get("csv") {
-                        try {
-                            call.response.header(
-                                HttpHeaders.ContentType,
-                                "text/csv"
-                            )
-                            val headers = mutableSetOf<String>()
-                            val out = mutableListOf<MutableList<String?>>()
-                            val query = repo.find()
-                            // populate headers
-                            for (data in query) {
-                                for (key in data.toSimpleScoutingData().data.keys) {
-                                    headers.add(key)
+                        withContext(Dispatchers.IO) {
+                            try {
+                                call.response.header(
+                                    HttpHeaders.ContentType,
+                                    "text/csv"
+                                )
+                                val headers = mutableSetOf<String>()
+                                val out = mutableListOf<MutableList<String?>>()
+                                val query = repo.find()
+                                // populate headers
+                                for (data in query) {
+                                    for (key in data.toSimpleScoutingData().data.keys) {
+                                        headers.add(key)
+                                    }
                                 }
-                            }
-                            if (headers.isEmpty()) {
-                                call.respond("")
-                                return@get
-                            }
-                            out.add(0, headers.toMutableList())
-                            for (data in query) {
-                                val outEntry = mutableListOf<String?>()
-                                for (header in headers) {
-                                    outEntry.add(data.toSimpleScoutingData().data[header]?.content)
+                                if (headers.isEmpty()) {
+                                    call.respond("")
+                                    return@withContext
                                 }
-                                out.add(outEntry)
-                            }
-                            val csv = StringBuilder()
-                            for (entry in out) {
-                                for (element in entry) {
-                                    csv.append(element ?: "").append(',')
+                                out.add(0, headers.toMutableList())
+                                for (data in query) {
+                                    val outEntry = mutableListOf<String?>()
+                                    for (header in headers) {
+                                        outEntry.add(data.toSimpleScoutingData().data[header]?.content)
+                                    }
+                                    out.add(outEntry)
                                 }
-                                csv.deleteCharAt(csv.length-1)
-                                csv.append("\n")
+                                val csv = StringBuilder()
+                                for (entry in out) {
+                                    for (element in entry) {
+                                        csv.append(element ?: "").append(',')
+                                    }
+                                    csv.deleteCharAt(csv.length - 1)
+                                    csv.append("\n")
+                                }
+                                call.respond(csv.toString())
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                                call.response.header(
+                                    HttpHeaders.ContentType,
+                                    "application/json"
+                                )
+                                call.respond(json.encodeError(e.toString()))
                             }
-                            call.respond(csv.toString())
-                        } catch (e: Exception) {
-                            e.printStackTrace()
-                            call.response.header(
-                                HttpHeaders.ContentType,
-                                "application/json"
-                            )
-                            call.respond(json.encodeError(e.toString()))
                         }
                     }
                 }

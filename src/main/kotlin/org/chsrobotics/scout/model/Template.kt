@@ -41,12 +41,18 @@ enum class ScoutingType {
 }
 
 @Serializable
+data class TemplateTab(
+    val title: String,
+    val entries: List<TemplateEntry>
+)
+
+@Serializable
 data class Template(
     val name: String,
     val uuid: String,
     val version: Int,
-    val pit: List<TemplateEntry>,
-    val match: List<TemplateEntry>
+    val pit: TemplateTab,
+    val match: TemplateTab,
 ) {
     companion object {
         fun loadAll(): List<Template> {
@@ -244,7 +250,8 @@ data class CheckboxEntry(
 data class CounterEntry(
     override val name: String,
     override val prompt: String,
-    override val value: Int? = null
+    override val value: Int? = null,
+    val maxValue: Int? = null
 ) : ValueTemplateEntry, PromptTemplateEntry
 
 @Serializable
