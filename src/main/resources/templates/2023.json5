@@ -76,37 +76,19 @@
                 prompt: "Autonomous"
             },
             {
-                name: "cone_high_auto",
+                name: "high_auto",
                 type: "counter",
-                prompt: "Cone High"
+                prompt: "High"
             },
             {
-                name: "cone_mid_auto",
+                name: "mid_auto",
                 type: "counter",
-                prompt: "Cone Mid"
+                prompt: "Mid"
             },
             {
-                name: "cone_low_auto",
+                name: "low_auto",
                 type: "counter",
-                prompt: "Cone Low"
-            },
-            {
-                type: "spacer",
-            },
-            {
-                name: "cube_high_auto",
-                type: "counter",
-                prompt: "Cube High"
-            },
-            {
-                name: "cube_mid_auto",
-                type: "counter",
-                prompt: "Cube Mid"
-            },
-            {
-                name: "cube_low_auto",
-                type: "counter",
-                prompt: "Cube Low"
+                prompt: "Low"
             },
             {
                 type: "spacer",
@@ -141,37 +123,19 @@
                 prompt: "Teleop"
             },
             {
-                name: "cone_high_teleop",
+                name: "high_teleop",
                 type: "counter",
-                prompt: "Cone High"
+                prompt: "High"
             },
             {
-                name: "cone_mid_teleop",
+                name: "mid_teleop",
                 type: "counter",
-                prompt: "Cone Mid"
+                prompt: "Mid"
             },
             {
-                name: "cone_low_teleop",
+                name: "low_teleop",
                 type: "counter",
-                prompt: "Cone Low"
-            },
-            {
-                type: "spacer",
-            },
-            {
-                name: "cube_high_teleop",
-                type: "counter",
-                prompt: "Cube High"
-            },
-            {
-                name: "cube_mid_teleop",
-                type: "counter",
-                prompt: "Cube Mid"
-            },
-            {
-                name: "cube_low_teleop",
-                type: "counter",
-                prompt: "Cube Low"
+                prompt: "Low"
             },
             {
                 type: "spacer",
@@ -204,48 +168,28 @@
                 ]
             },
             {
-                name: "robot_abilities",
-                type: "section",
-                prompt: "Robot Abilities"
-            },
-            {
-                name: "ground_cube",
-                type: "checkbox",
-                prompt: "Cubes from ground",
-            },
-            {
-                name: "ground_cone",
-                type: "checkbox",
-                prompt: "Cones from ground",
-            },
-            {
-                name: "play_cube",
-                type: "checkbox",
-                prompt: "Cubes from player stations",
-            },
-            {
-                name: "player_cone",
-                type: "checkbox",
-                prompt: "Cones from player stations",
-            },
-            {
                 type: "spacer",
             },
             {
-                name: "foul_number",
-                type: "counter",
-                prompt: "Number of Fouls"
-            },
-            {
-                name: "defense_grade",
-                type: "counter",
-                prompt: "Grade of Defense",
-                maxValue: 5
-            },
-            {
-                name: "fast",
+                name: "scored_cubes",
                 type: "checkbox",
-                prompt: "Fast",
+                prompt: "Scored only cubes",
+                
+            },
+            {
+                name: "scored_cones",
+                type: "checkbox",
+                prompt: "Scored only cones",
+            
+            }, 
+            {
+                name: "scored_both",
+                type: "checkbox",
+                prompt: "Scored both cones and cubes",
+                
+            },
+            {
+                type: "spacer",
             },
             {
                 name: "alliance_performance",
@@ -281,9 +225,9 @@
                 type: "spacer",
             },
             {
-                name: "comments",
+                name: "notes",
                 type: "text",
-                prompt: "Additional Comments.",
+                prompt: "Notes",
                 multiline: true,
             }
         ]
