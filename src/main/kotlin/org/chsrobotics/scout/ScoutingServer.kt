@@ -1,16 +1,13 @@
 package org.chsrobotics.scout
 
-import com.fasterxml.jackson.databind.JavaType
-import com.fasterxml.jackson.databind.JsonMappingException
-import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.module.SimpleModule
-import com.fasterxml.jackson.databind.node.JsonNodeType
 import io.github.oshai.KotlinLogging
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
+import io.ktor.server.plugins.cors.routing.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
@@ -22,8 +19,8 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.*
 import org.chsrobotics.scout.model.*
-import org.chsrobotics.scout.model.JsonPrimitiveSerializer
 import org.chsrobotics.scout.util.encodeError
+import org.chsrobotics.scout.model.JsonPrimitiveSerializer
 import org.dizitart.kno2.filters.eq
 import org.dizitart.kno2.filters.gt
 import org.dizitart.kno2.nitrite
@@ -72,6 +69,16 @@ fun main() {
     val defaultTemplate = templates.filter { it.uuid == Template.defaultUuid() }.maxByOrNull { it.version }
 
     embeddedServer(Netty, port = 8090, module = {
+        install(CORS) {
+            allowMethod(HttpMethod.Options)
+            allowMethod(HttpMethod.Put)
+            allowMethod(HttpMethod.Delete)
+            allowMethod(HttpMethod.Patch)
+            allowHeader(HttpHeaders.Authorization)
+            allowHeader(HttpHeaders.AccessControlAllowOrigin)
+            allowHeader("MyCustomHeader")
+            anyHost()
+        }
         routing {
             get("/template") {
                 withContext(Dispatchers.IO) {

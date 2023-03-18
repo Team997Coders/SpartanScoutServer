@@ -12,6 +12,7 @@ repositories {
 }
 
 dependencies {
+    implementation("io.ktor:ktor-server-cors-jvm:2.2.3")
     testImplementation(kotlin("test"))
     implementation("io.ktor:ktor-server-core:2.2.3")
     implementation("io.ktor:ktor-server-netty:2.2.3")
