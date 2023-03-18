@@ -70,13 +70,15 @@ fun main() {
 
     embeddedServer(Netty, port = 8090, module = {
         install(CORS) {
-            allowMethod(HttpMethod.Options)
-            allowMethod(HttpMethod.Put)
-            allowMethod(HttpMethod.Post)
-            allowMethod(HttpMethod.Delete)
-            allowMethod(HttpMethod.Patch)
-            allowHeader(HttpHeaders.Authorization)
-            allowHeader(HttpHeaders.AccessControlAllowOrigin)
+//            allowMethod(HttpMethod.Options)
+//            allowMethod(HttpMethod.Put)
+//            allowMethod(HttpMethod.Post)
+//            allowMethod(HttpMethod.Delete)
+//            allowMethod(HttpMethod.Patch)
+//            allowHeader(HttpHeaders.Authorization)
+//            allowHeader(HttpHeaders.AccessControlAllowOrigin)
+            HttpMethod.DefaultMethods.forEach { allowMethod(it) }
+            allowHeaders { true }
             anyHost()
         }
         routing {
