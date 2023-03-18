@@ -76465,7 +76465,7 @@ c=d.f8(0,$.WU(),t.kE)
 b=o.b
 b===$&&A.b()
 s=6
-return A.w(J.aF6(c,"https://scout.elliotnash.org/"+b.b,t.z),$async$j8)
+return A.w(J.aF6(c,"https://scout.elliotnash.org/api/"+b.b,t.z),$async$j8)
 case 6:n=a9
 m=n.a
 l=A.a([],t.Jw)
@@ -76591,7 +76591,7 @@ i=j.f8(0,$.WU(),t.kE)
 h=o.b
 h===$&&A.b()
 s=6
-return A.w(J.aFj(i,"https://scout.elliotnash.org/"+h.b,null,a.RK(),null,null,A.asp("POST",null),null,t.z),$async$md)
+return A.w(J.aFj(i,"https://scout.elliotnash.org/api/"+h.b,null,a.RK(),null,null,A.asp("POST",null),null,t.z),$async$md)
 case 6:n=a0
 s=7
 return A.w(A.zW(n.a,j),$async$md)
@@ -76647,7 +76647,7 @@ h=n.b
 h===$&&A.b()
 g=t.N
 s=7
-return A.w(J.aFi(i,"https://scout.elliotnash.org/"+h.b,null,B.am.wk(A.az(["uuid",b],g,g),null),A.asp("DELETE",null),null,t.z),$async$eI)
+return A.w(J.aFi(i,"https://scout.elliotnash.org/api/"+h.b,null,B.am.wk(A.az(["uuid",b],g,g),null),A.asp("DELETE",null),null,t.z),$async$eI)
 case 7:d=A
 c=J
 s=8
@@ -76849,7 +76849,7 @@ if(!j)l.l(0,"version",b)
 e=A
 d=A
 s=3
-return A.w(J.aF7(o,"https://scout.elliotnash.org/template",l,m),$async$jW)
+return A.w(J.aF7(o,"https://scout.elliotnash.org/api/template",l,m),$async$jW)
 case 3:i=e.atz(d.aPu(a0.a,null))
 s=4
 return A.w(f.f8(0,$.ki().ge8(),t.BJ),$async$jW)
