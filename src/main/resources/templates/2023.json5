@@ -13,7 +13,7 @@
     version: 1,
     // Pit scouting
     pit: {
-        title: "%team_number%",
+        title: "Team %team_number%",
         entries: [
             {
                 name: "team_info",
@@ -41,7 +41,7 @@
     },
     // Match scouting
     match: {
-        title: "%team_number% - %match_number%",
+        title: "Team %team_number% - Match %match_number%",
         entries: [
             {
                 name: "match_info",
@@ -64,11 +64,6 @@
                 prompt: "Team Number",
                 numeric: true,
                 length: 4,
-            },
-            {
-                name: "match_number",
-                type: "text",
-                prompt: "Match Number",
             },
             {
                 name: "alliance_color",
