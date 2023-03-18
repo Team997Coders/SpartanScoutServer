@@ -71,7 +71,7 @@ fun main() {
 
     val defaultTemplate = templates.filter { it.uuid == Template.defaultUuid() }.maxByOrNull { it.version }
 
-    embeddedServer(Netty, port = 8080, module = {
+    embeddedServer(Netty, port = 8090, module = {
         routing {
             get("/template") {
                 withContext(Dispatchers.IO) {
