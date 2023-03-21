@@ -10,7 +10,7 @@
     // This should stay the same for all versions.
     uuid: "8310d469-4b83-4df8-aae6-be6da6bb063d",
     // This should be incremented each time the template is updated.
-    version: 1,
+    version: 2,
     // Pit scouting
     pit: {
         title: "Team %team_number%",
