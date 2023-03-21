@@ -2,7 +2,7 @@
 // Instead, make a copy of this file with an incremented version field
 
 // Allowed types
-// section, spacer, text, checkbox, counter, picture
+// section, spacer, text, segment, checkbox, counter, picture
 // picture type is not included with regular upload
 // TODO add chooser type
 {
@@ -67,8 +67,12 @@
             },
             {
                 name: "alliance_color",
-                type: "text",
+                type: "segment",
                 prompt: "Alliance Color",
+                segments: {
+                    "blue": "Blue",
+                    "red": "Red"
+                }
             },
             {
                 name: "autonomous_section",

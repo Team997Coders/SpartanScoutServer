@@ -89,6 +89,9 @@ fun main() {
                 get("/ping") {
                     call.respond("Pong!")
                 }
+                get("/version") {
+                    call.respond(1)
+                }
                 get("/template") {
                     withContext(Dispatchers.IO) {
                         val uuid = call.request.queryParameters["uuid"]

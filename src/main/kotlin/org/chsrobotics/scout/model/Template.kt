@@ -189,6 +189,8 @@ enum class EntryType {
     SPACER,
     @SerialName("text")
     TEXT,
+    @SerialName("segment")
+    SEGMENT,
     @SerialName("checkbox")
     CHECKBOX,
     @SerialName("counter")
@@ -234,6 +236,15 @@ data class TextEntry(
     val numeric: Boolean = false,
     val multiline: Boolean = false,
     val length: Int? = null
+) : ValueTemplateEntry, PromptTemplateEntry
+
+@Serializable
+@SerialName("segment")
+data class SegmentEntry(
+    override val name: String,
+    override val prompt: String,
+    override val value: String? = null,
+    val segments: Map<String, String>
 ) : ValueTemplateEntry, PromptTemplateEntry
 
 @Serializable
