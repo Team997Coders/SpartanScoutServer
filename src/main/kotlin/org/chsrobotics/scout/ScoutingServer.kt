@@ -212,7 +212,13 @@ fun main() {
                                     for (data in query) {
                                         val outEntry = mutableListOf<String?>()
                                         for (header in headers) {
-                                            outEntry.add(data.toSimpleScoutingData().data[header]?.content)
+                                            val primitive = data.toSimpleScoutingData().data[header]
+                                            var content = if (primitive != null && primitive.booleanOrNull != null) {
+                                                if (primitive.boolean) "Y" else "N"
+                                            } else {
+                                                primitive?.content
+                                            }
+                                            outEntry.add(content)
                                         }
                                         out.add(outEntry)
                                     }
