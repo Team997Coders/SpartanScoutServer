@@ -67,8 +67,12 @@
             },
             {
                 name: "alliance_color",
-                type: "text",
+                type: "segment",
                 prompt: "Alliance Color",
+                segments: {
+                    "blue": "Blue",
+                    "red": "Red"
+                }
             },
             {
                 name: "autonomous_section",
