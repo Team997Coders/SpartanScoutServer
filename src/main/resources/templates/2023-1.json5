@@ -1,0 +1,239 @@
+// NEVER DELETE TEMPLATES WITHOUT RESETTING THE DATABASE
+// Instead, make a copy of this file with an incremented version field
+
+// Allowed types
+// section, spacer, text, segment, checkbox, counter, picture
+// picture type is not included with regular upload
+// TODO add chooser type
+{
+    name: "2023 Charged Up",
+    // This should stay the same for all versions.
+    uuid: "8310d469-4b83-4df8-aae6-be6da6bb063d",
+    // This should be incremented each time the template is updated.
+    version: 1,
+    // Pit scouting
+    pit: {
+        title: "Team %team_number%",
+        entries: [
+            {
+                name: "team_info",
+                type: "section",
+                prompt: "Team Info"
+            },
+            {
+                name: "scouter_name",
+                type: "text",
+                prompt: "Scouter Name"
+            },
+            {
+                name: "team_number",
+                type: "text",
+                prompt: "Team Number",
+                numeric: true,
+                length: 4,
+            },
+            {
+                name: "comments",
+                type: "text",
+                prompt: "Additional Comments."
+            }
+        ]
+    },
+    // Match scouting
+    match: {
+        title: "Team %team_number% - Match %match_number%",
+        entries: [
+            {
+                name: "match_info",
+                type: "section",
+                prompt: "Match Info"
+            },
+            {
+                name: "scouter_name",
+                type: "text",
+                prompt: "Scouter Name"
+            },
+            {
+                name: "match_number",
+                type: "text",
+                prompt: "Match Number",
+            },
+            {
+                name: "team_number",
+                type: "text",
+                prompt: "Team Number",
+                numeric: true,
+                length: 4,
+            },
+            {
+                name: "alliance_color",
+                type: "segment",
+                prompt: "Alliance Color",
+                segments: {
+                    "blue": "Blue",
+                    "red": "Red"
+                }
+            },
+            {
+                name: "autonomous_section",
+                type: "section",
+                prompt: "Autonomous"
+            },
+            {
+                name: "high_auto",
+                type: "counter",
+                prompt: "High"
+            },
+            {
+                name: "mid_auto",
+                type: "counter",
+                prompt: "Mid"
+            },
+            {
+                name: "low_auto",
+                type: "counter",
+                prompt: "Low"
+            },
+            {
+                type: "spacer",
+            },
+            {
+                name: "engaged_auto",
+                type: "checkbox",
+                prompt: "Level on Charge Station (ENGAGED)",
+                excludes: [
+                    "docked_auto"
+                ]
+            },
+            {
+                name: "docked_auto",
+                type: "checkbox",
+                prompt: "Touching Charge Station (DOCKED)",
+                excludes: [
+                    "engaged_auto"
+                ]
+            },
+            {
+                type: "spacer",
+            },
+            {
+                name: "mobility",
+                type: "checkbox",
+                prompt: "Left Community (MOBILITY)"
+            },
+            {
+                name: "teleop_section",
+                type: "section",
+                prompt: "Teleop"
+            },
+            {
+                name: "high_teleop",
+                type: "counter",
+                prompt: "High"
+            },
+            {
+                name: "mid_teleop",
+                type: "counter",
+                prompt: "Mid"
+            },
+            {
+                name: "low_teleop",
+                type: "counter",
+                prompt: "Low"
+            },
+            {
+                type: "spacer",
+            },
+            {
+                name: "engaged_teleop",
+                type: "checkbox",
+                prompt: "Level on Charge Station (ENGAGED)",
+                excludes: [
+                    "docked_teleop",
+                    "parked_teleop",
+                ]
+            },
+            {
+                name: "docked_teleop",
+                type: "checkbox",
+                prompt: "Touching Charge Station (DOCKED)",
+                excludes: [
+                    "engaged_teleop",
+                    "parked_teleop",
+                ]
+            },
+            {
+                name: "parked_teleop",
+                type: "checkbox",
+                prompt: "Within community but not docked (PARKED)",
+                excludes: [
+                    "docked_teleop",
+                    "engaged_teleop",
+                ]
+            },
+            {
+                type: "spacer",
+            },
+            {
+                name: "scored_cubes",
+                type: "checkbox",
+                prompt: "Scored only cubes",
+                
+            },
+            {
+                name: "scored_cones",
+                type: "checkbox",
+                prompt: "Scored only cones",
+            
+            }, 
+            {
+                name: "scored_both",
+                type: "checkbox",
+                prompt: "Scored both cones and cubes",
+                
+            },
+            {
+                type: "spacer",
+            },
+            {
+                name: "alliance_performance",
+                type: "section",
+                prompt: "Alliance Performance"
+            },
+            {
+                name: "alliance_win",
+                type: "checkbox",
+                prompt: "Win",
+            },
+            {
+                name: "alliance_coopertition",
+                type: "checkbox",
+                prompt: "Coopertition",
+            },
+            {
+                name: "alliance_sustainability",
+                type: "checkbox",
+                prompt: "Sustainability",
+            },
+            {
+                name: "alliance_cs_bonus",
+                type: "checkbox",
+                prompt: "Charge Station Bonus",
+            },
+            {
+                name: "rp_number",
+                type: "counter",
+                prompt: "Number of Ranking Points"
+            },
+            {
+                type: "spacer",
+            },
+            {
+                name: "notes",
+                type: "text",
+                prompt: "Notes",
+                multiline: true,
+            }
+        ]
+    }
+}
