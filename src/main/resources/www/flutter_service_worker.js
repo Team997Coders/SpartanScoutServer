@@ -3,11 +3,10 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 const RESOURCES = {
-  "version.json": "e915779b9a54aaad6218bfd4f3806bbe",
-"index.html": "2b445b1e6b937ea27723233492e2e6a0",
-"/": "2b445b1e6b937ea27723233492e2e6a0",
-"main.dart.js": "97f458313724cdab2375356e92db1c60",
-"flutter.js": "a85fcf6324d3c4d3ae3be1ae4931e9c5",
+  "version.json": "66458aaf61d6679c79c72623a4df4d36",
+"index.html": "65d35eb3c1db0acb7dba84d1330d9617",
+"/": "65d35eb3c1db0acb7dba84d1330d9617",
+"main.dart.js": "6eaac545a42bc33c418417acdcfecbe0",
 "favicon.png": "d039247c666d321e8f7bdd102ba09b1a",
 "icons/Icon-192.png": "e1cd90cd4657bdb0d03001af41cec43f",
 "icons/Icon-maskable-192.png": "e1cd90cd4657bdb0d03001af41cec43f",
@@ -19,11 +18,7 @@ const RESOURCES = {
 "assets/FontManifest.json": "dc3d03800ccca4601324923c0b1d6d57",
 "assets/packages/cupertino_icons/assets/CupertinoIcons.ttf": "6d342eb68f170c97609e9da345464e5e",
 "assets/fonts/MaterialIcons-Regular.otf": "e7069dfd19b331be16bed984668fe080",
-"assets/assets/images/spartan-logo.png": "252dc56babf3aef568105dbe25a35423",
-"canvaskit/canvaskit.js": "97937cb4c2c2073c968525a3e08c86a3",
-"canvaskit/profiling/canvaskit.js": "c21852696bc1cc82e8894d851c01921a",
-"canvaskit/profiling/canvaskit.wasm": "371bc4e204443b0d5e774d64a046eb99",
-"canvaskit/canvaskit.wasm": "3de12d898ec208a5f31362cc00f09b9e"
+"assets/assets/images/spartan-logo.png": "252dc56babf3aef568105dbe25a35423"
 };
 
 // The application shell files that are downloaded before a service worker can
